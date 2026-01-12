@@ -100,10 +100,19 @@ export const GigDetailsPage: React.FC = () => {
       ? (gig.ownerId as any)._id === user._id 
       : gig.ownerId === user._id
   );
-  const userHasBid = userBids?.some(bid => bid.gigId === id);
-  const canBid = user && !isOwner && gig.status === 'open';
-  const showBidForm = canBid && userBids && !userHasBid;
-  const showBidSubmitted = canBid && userHasBid;
+
+  // Robustly determine whether the current user has already placed a bid
+  // on this gig. Handles bid.gigId being either a string or an object.
+  const userHasBid = !!userBids && userBids.some(bid => {
+    const bidGigId = bid.gigId && typeof bid.gigId === 'object' ? (bid.gigId as any)._id : bid.gigId;
+    return String(bidGigId) === String(gig._id);
+  });
+
+  const canBid = !!user && !isOwner && gig.status === 'open';
+  // If the user has already bid, show the submitted message (but not to the owner).
+  const showBidSubmitted = !!user && userHasBid && !isOwner;
+  // Show the form only when the gig is open, the user isn't the owner, and they haven't bid yet.
+  const showBidForm = canBid && !userHasBid;
   const showOwnerMessage = isOwner && gig.status === 'open';
 
   return (
