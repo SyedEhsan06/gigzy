@@ -18,10 +18,17 @@ export const AuthProvider: React.FC<{ children: any }> = ({ children }) => {
 
   useEffect(() => {
     const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
       try {
         const currentUser = await authApi.getCurrentUser();
         setUser(currentUser);
       } catch (error) {
+        localStorage.removeItem('token');
         setUser(null);
       } finally {
         setIsLoading(false);
@@ -38,9 +45,11 @@ export const AuthProvider: React.FC<{ children: any }> = ({ children }) => {
   const logout = async () => {
     try {
       await authApi.logout();
-      setUser(null);
     } catch (error) {
       console.error('Logout error:', error);
+    } finally {
+      localStorage.removeItem('token');
+      setUser(null);
     }
   };
 

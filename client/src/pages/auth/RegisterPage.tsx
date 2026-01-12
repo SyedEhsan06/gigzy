@@ -18,8 +18,8 @@ export const RegisterPage: React.FC = () => {
 
   const registerMutation = useMutation({
     mutationFn: authApi.register,
-    onSuccess: (data) => {
-      login(data.user)
+    onSuccess: (user) => {
+      login(user)
       toast.success("Account created successfully! Welcome to GigFlow.")
       navigate("/gigs")
     },

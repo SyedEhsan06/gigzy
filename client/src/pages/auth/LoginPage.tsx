@@ -17,8 +17,8 @@ export const LoginPage: React.FC = () => {
 
   const loginMutation = useMutation({
     mutationFn: authApi.login,
-    onSuccess: (data) => {
-      login(data.user)
+    onSuccess: (user) => {
+      login(user)
       toast.success("Welcome back! Logged in successfully.")
       navigate("/gigs")
     },
