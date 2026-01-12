@@ -67,17 +67,9 @@ function App() {
               },
               success: {
                 duration: 3000,
-                theme: {
-                  primary: '#10B981',
-                  secondary: '#fff',
-                },
               },
               error: {
                 duration: 5000,
-                theme: {
-                  primary: '#EF4444',
-                  secondary: '#fff',
-                },
               },
             }}
           />

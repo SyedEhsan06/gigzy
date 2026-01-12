@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { bidsApi } from '../../api/bids';
-import type { Bid, User } from '../../types';
+import type { User } from '../../types';
 
 interface BidsListProps {
   gigId: string;

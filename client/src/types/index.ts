@@ -22,7 +22,7 @@ export interface Bid {
   freelancerId: User | string;
   message: string;
   price: number;
-  status: 'pending' | 'hired' | 'rejected';
+  status: 'pending' | 'hired' | 'rejected' | 'withdrawn';
   createdAt: string;
   updatedAt: string;
 }

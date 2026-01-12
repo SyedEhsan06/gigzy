@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { bidsApi } from '../../api/bids';
 import { Navbar } from '../../components/layout/Navbar';
-import type { Bid, Gig } from '../../types';
+import type { Gig } from '../../types';
 
 export const MyBidsPage: React.FC = () => {
   const { data: bids, isLoading, error } = useQuery({

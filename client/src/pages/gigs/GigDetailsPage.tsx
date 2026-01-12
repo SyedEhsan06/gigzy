@@ -100,7 +100,6 @@ export const GigDetailsPage: React.FC = () => {
       ? (gig.ownerId as any)._id === user._id 
       : gig.ownerId === user._id
   );
-  const isAlreadyBidder = userBids?.some(bid => bid.gigId === id);
   const userHasBid = userBids?.some(bid => bid.gigId === id);
   const canBid = user && !isOwner && gig.status === 'open';
   const showBidForm = canBid && userBids && !userHasBid;
