@@ -12,4 +12,15 @@ export default defineConfig({
     }),
     tailwindcss()
   ],
+  // Dev proxy to avoid cross-site cookies issues during development.
+  // This makes requests to `/api` same-origin so httpOnly cookies are sent on refresh
+  server: {
+    proxy: {
+      '/api': {
+        target: import.meta.env.VITE_PUBLIC_URL || 'http://localhost:5001',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })
